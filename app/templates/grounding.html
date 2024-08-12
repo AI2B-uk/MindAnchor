@@ -1,0 +1,130 @@
+{% extends "base.html" %} {% block title %}Grounding Techniques{% endblock %} {%
+block content %}
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title text-center">Grounding Techniques</h1>
+    <p class="lead text-center">
+      Select a grounding technique to help you stay present and focused.
+    </p>
+    <hr />
+
+    <div id="grounding-techniques" class="list-group">
+      <a
+        href="#"
+        class="list-group-item list-group-item-action"
+        onclick="loadTechnique('breathing')"
+        >Breathing Exercises</a
+      >
+      <a
+        href="#"
+        class="list-group-item list-group-item-action"
+        onclick="loadTechnique('tactile')"
+        >Tactile Sensation</a
+      >
+      <a
+        href="#"
+        class="list-group-item list-group-item-action"
+        onclick="loadTechnique('listening')"
+        >Mindful Listening</a
+      >
+      <a
+        href="#"
+        class="list-group-item list-group-item-action"
+        onclick="loadTechnique('visual')"
+        >Visual Focus</a
+      >
+    </div>
+
+    <div id="technique-description" class="mt-4">
+      <h4>Technique Description</h4>
+      <p>Select a technique to see the description.</p>
+    </div>
+
+    <div id="meditation-guide" class="mt-4" style="display: none">
+      <h4>Meditation Guide</h4>
+      <p id="meditation-text">
+        Select a technique to start the guided meditation.
+      </p>
+      <audio id="meditation-audio" controls style="display: none">
+        <source id="audio-source" src="" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+</div>
+
+<script>
+  function loadTechnique(technique) {
+    const descriptions = {
+      breathing:
+        "Breathing exercises help you stay calm and focused. Take slow, deep breaths. \
+            Here's a guide:\n1. Sit or lie down in a comfortable position.\n2. Close your eyes if you feel comfortable.\n3. Inhale slowly through your nose, filling your lungs fully.\n4. Hold your breath for a few seconds.\n5. Exhale slowly through your mouth. Repeat this process for several minutes.",
+
+      tactile:
+        "Tactile sensation involves touching objects to bring your attention to the present moment.\
+            Here's a guide:\n1. Find a familiar object, like a stress ball or a piece of cloth.\n2. Close your eyes and focus on the sensation of the object in your hands.\n3. Notice the texture, temperature, and weight of the object. Use this to bring your mind back to the present moment.",
+
+      listening:
+        "Mindful listening focuses on tuning into sounds around you, helping to ground your thoughts.\
+            Here's a guide:\n1. Sit quietly and close your eyes.\n2. Pay attention to the sounds around you, whether they are near or far.\n3. Focus on the rhythm, pitch, and tone of the sounds. Allow your thoughts to drift away as you concentrate on listening.",
+
+      visual:
+        "Visual focus involves concentrating on a specific object to keep your mind centered.\
+            Here's a guide:\n1. Find a stationary object to focus on, such as a picture or a candle.\n2. Sit comfortably and focus on the object without looking away.\n3. Notice every detail of the object - its color, shape, texture. Allow your mind to relax as you concentrate on what you see.",
+    };
+
+    const meditations = {
+      breathing:
+        "{{ url_for('static', filename='meditations/breathing_exercise.mp3') }}",
+      tactile: "",
+      listening:
+        "{{ url_for('static', filename='meditations/mindful_listening.mp3') }}",
+      visual: "",
+    };
+
+    document.getElementById("technique-description").innerHTML = `
+            <h4>${
+              technique.charAt(0).toUpperCase() + technique.slice(1)
+            } Technique</h4>
+            <p>${descriptions[technique].replace(/\n/g, "<br>")}</p>
+        `;
+
+    const meditationAudio = document.getElementById("meditation-audio");
+    const meditationText = document.getElementById("meditation-text");
+
+    if (meditations[technique]) {
+      document.getElementById("meditation-guide").style.display = "block";
+      meditationText.innerHTML =
+        "Here is a guided meditation for this technique. Press play when you're ready.";
+      meditationAudio.style.display = "block";
+      document.getElementById("audio-source").src = meditations[technique];
+      meditationAudio.load();
+    } else {
+      meditationText.innerHTML =
+        "This technique does not have a guided meditation.";
+      meditationAudio.style.display = "none";
+    }
+  }
+</script>
+
+<style>
+  .card {
+    max-width: 700px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa;
+  }
+  .card-title {
+    font-size: 1.75rem;
+    color: #333;
+  }
+  .lead {
+    font-size: 1.25rem;
+    color: #666;
+  }
+  .list-group-item {
+    cursor: pointer;
+  }
+</style>
+{% endblock %}

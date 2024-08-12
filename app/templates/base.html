@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}MindAnchor{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{{ url_for('dashboard') }}">MindAnchor</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('reality_testing') }}"
+              >Reality Testing</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('grounding') }}"
+              >Grounding Techniques</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('cognitive') }}"
+              >Cognitive Restructuring</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('safe_space') }}"
+              >Safe Space</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('messages') }}">Messages</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('crisis_plan') }}"
+              >Crisis Planning</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('journal') }}">Journal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('settings') }}">Settings</a>
+          </li>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="toggleTheme()"
+          >
+            Toggle Theme
+          </button>
+        </ul>
+      </div>
+    </nav>
+    <main class="container mt-5">{% block content %}{% endblock %}</main>
+
+    <!-- Authentication Modal -->
+    <div
+      class="modal fade"
+      id="authModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="authModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="authModalLabel">
+              Please Log In or Sign Up
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- Tabs for login/signup -->
+            <ul class="nav nav-tabs" id="authTab" role="tablist">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  id="login-tab"
+                  data-toggle="tab"
+                  href="#login"
+                  role="tab"
+                  aria-controls="login"
+                  aria-selected="true"
+                  >Login</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  id="signup-tab"
+                  data-toggle="tab"
+                  href="#signup"
+                  role="tab"
+                  aria-controls="signup"
+                  aria-selected="false"
+                  >Sign Up</a
+                >
+              </li>
+            </ul>
+            <div class="tab-content" id="authTabContent">
+              <div
+                class="tab-pane fade show active"
+                id="login"
+                role="tabpanel"
+                aria-labelledby="login-tab"
+              >
+                {% if login_form %}
+                <form method="POST" action="{{ url_for('login') }}">
+                  {{ login_form.hidden_tag() }}
+                  <div class="form-group">
+                    {{ login_form.email.label(class="control-label") }} {{
+                    login_form.email(class="form-control") }}
+                  </div>
+                  <div class="form-group">
+                    {{ login_form.password.label(class="control-label") }} {{
+                    login_form.password(class="form-control") }}
+                  </div>
+                  <button type="submit" class="btn btn-primary">Log In</button>
+                </form>
+                {% endif %}
+              </div>
+              <div
+                class="tab-pane fade"
+                id="signup"
+                role="tabpanel"
+                aria-labelledby="signup-tab"
+              >
+                {% if register_form %}
+                <form method="POST" action="{{ url_for('register') }}">
+                  {{ register_form.hidden_tag() }}
+                  <div class="form-group">
+                    {{ register_form.email.label(class="control-label") }} {{
+                    register_form.email(class="form-control") }}
+                  </div>
+                  <div class="form-group">
+                    {{ register_form.password.label(class="control-label") }} {{
+                    register_form.password(class="form-control") }}
+                  </div>
+                  <button type="submit" class="btn btn-primary">Sign Up</button>
+                </form>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      function showAuthModal() {
+        $("#authModal").modal("show");
+      }
+    </script>
+    <script>
+      $(document).ready(function () {
+        // Check if an AJAX response indicates the user needs to log in
+        $.ajaxSetup({
+          statusCode: {
+            401: function () {
+              showAuthModal();
+            },
+          },
+        });
+      });
+    </script>
+    <script>
+      function toggleTheme() {
+        const body = document.body;
+        const currentTheme = body.classList.contains("dark-theme")
+          ? "dark"
+          : "light";
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+        body.classList.remove(currentTheme + "-theme");
+        body.classList.add(newTheme + "-theme");
+
+        // Save the new theme in the database
+        fetch("/set_theme", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": "{{ csrf_token() }}", // CSRF protection if using Flask-WTF
+          },
+          body: JSON.stringify({ theme: newTheme }),
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const theme = "{{ current_user.theme }}";
+        document.body.classList.add(theme + "-theme");
+      });
+    </script>
+  </body>
+</html>

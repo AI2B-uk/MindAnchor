@@ -1,0 +1,56 @@
+{% extends "base.html" %} {% block title %}Dashboard{% endblock %} {% block
+content %}
+<div class="jumbotron">
+  <h1 class="display-4">Welcome to MindAnchor</h1>
+  <p class="lead">Select a tool to start managing your experiences.</p>
+  <hr class="my-4" />
+  <p>Choose from the options below:</p>
+  <div class="btn-group-vertical w-100">
+    <a
+      class="btn btn-primary btn-lg"
+      href="{{ url_for('reality_testing') }}"
+      role="button"
+      >Reality Testing</a
+    >
+    <a
+      class="btn btn-secondary btn-lg"
+      href="{{ url_for('grounding') }}"
+      role="button"
+      >Grounding Techniques</a
+    >
+    <a
+      class="btn btn-info btn-lg"
+      href="{{ url_for('cognitive') }}"
+      role="button"
+      >Cognitive Restructuring</a
+    >
+    <a
+      class="btn btn-success btn-lg"
+      href="{{ url_for('safe_space') }}"
+      role="button"
+      >Safe Space</a
+    >
+    <a
+      class="btn btn-warning btn-lg"
+      href="{{ url_for('messages') }}"
+      role="button"
+      >Messages</a
+    >
+    <a
+      class="btn btn-danger btn-lg"
+      href="{{ url_for('crisis_plan') }}"
+      role="button"
+      >Crisis Planning</a
+    >
+    <a class="btn btn-dark btn-lg" href="{{ url_for('journal') }}" role="button"
+      >Journal</a
+    >
+    <a
+      class="btn btn-light btn-lg"
+      href="{{ url_for('settings') }}"
+      role="button"
+      >Settings</a
+    >
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,127 @@
+/* Light Theme */
+body.light-theme {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.navbar.light-theme {
+  background-color: #f8f9fa;
+  color: #000000;
+}
+
+/* Dark Theme */
+body.dark-theme {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.navbar.dark-theme {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+/* Card styles */
+.card.light-theme {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.card.dark-theme {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+/* Button styles */
+.btn.light-theme {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.btn.dark-theme {
+  background-color: #555555;
+  color: #ffffff;
+}
+
+/* Form Element Styles */
+form.light-theme {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+form.dark-theme {
+  color: #ffffff;
+  background-color: #121212;
+}
+
+input.light-theme,
+textarea.light-theme,
+select.light-theme,
+button.light-theme {
+  color: #000000;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+}
+
+input.dark-theme,
+textarea.dark-theme,
+select.dark-theme,
+button.dark-theme {
+  color: #ffffff;
+  background-color: #333333;
+  border: 1px solid #ffffff;
+}
+
+input::placeholder.light-theme,
+textarea::placeholder.light-theme {
+  color: #666666;
+}
+
+input::placeholder.dark-theme,
+textarea::placeholder.dark-theme {
+  color: #aaaaaa;
+}
+
+/* General Element Styling */
+a.light-theme {
+  color: #007bff;
+}
+
+a.dark-theme {
+  color: #bbbbbb;
+}
+
+hr.light-theme {
+  border-color: #e0e0e0;
+}
+
+hr.dark-theme {
+  border-color: #555555;
+}
+
+/* Modal styling */
+.modal-content.light-theme {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.modal-content.dark-theme {
+  background-color: #222222;
+  color: #ffffff;
+}
+
+/* Form focus styles */
+input:focus.light-theme,
+textarea:focus.light-theme,
+select:focus.light-theme {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+input:focus.dark-theme,
+textarea:focus.dark-theme,
+select:focus.dark-theme {
+  border-color: #555555;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(85, 85, 85, 0.5);
+}

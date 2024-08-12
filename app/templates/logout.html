@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block title %}Logout{% endblock %} {% block content
+%}
+<div class="text-center mt-5">
+  <h1 class="display-4">You have been logged out</h1>
+  <p class="lead">You will be redirected to the dashboard shortly...</p>
+  <p>If not redirected, <a href="{{ url_for('dashboard') }}">click here</a>.</p>
+</div>
+<script>
+  setTimeout(function () {
+    window.location.href = "{{ url_for('dashboard') }}";
+  }, 5000);
+</script>
+{% endblock %}

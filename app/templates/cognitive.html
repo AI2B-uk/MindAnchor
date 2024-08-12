@@ -1,0 +1,204 @@
+{% extends "base.html" %} {% block title %}Cognitive Restructuring{% endblock %}
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title text-center">Cognitive Restructuring</h1>
+    <p class="lead text-center">
+      Let's work through your thoughts together. We'll take it one step at a
+      time.
+    </p>
+    <hr />
+    <form id="cognitive-restructuring-form">
+      <div id="step1" class="cognitive-step active">
+        <h4 class="mb-4">Step 1: Identify the Thought</h4>
+        <p>
+          What is the thought that is troubling you? Write it down as clearly as
+          possible.
+        </p>
+        <div class="form-group">
+          <textarea
+            class="form-control"
+            id="thought"
+            name="thought"
+            placeholder="Write your thought here..."
+            rows="3"
+            required
+          ></textarea>
+          <div class="invalid-feedback">Please describe your thought.</div>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="nextStep(2)">
+          Next
+        </button>
+      </div>
+
+      <div id="step2" class="cognitive-step">
+        <h4 class="mb-4">Step 2: Examine the Evidence</h4>
+        <p>
+          Think about the evidence that supports this thought. Is there anything
+          that makes this thought seem true?
+        </p>
+        <div class="form-group">
+          <textarea
+            class="form-control"
+            id="evidence"
+            name="evidence"
+            placeholder="Describe the evidence supporting this thought..."
+            rows="3"
+            required
+          ></textarea>
+          <div class="invalid-feedback">
+            Please describe the supporting evidence.
+          </div>
+        </div>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="previousStep(1)"
+        >
+          Back
+        </button>
+        <button type="button" class="btn btn-primary" onclick="nextStep(3)">
+          Next
+        </button>
+      </div>
+
+      <div id="step3" class="cognitive-step">
+        <h4 class="mb-4">Step 3: Consider the Contradictions</h4>
+        <p>
+          Now, let's think about any evidence that contradicts this thought. Is
+          there anything that suggests it might not be true?
+        </p>
+        <div class="form-group">
+          <textarea
+            class="form-control"
+            id="contradiction"
+            name="contradiction"
+            placeholder="Describe the evidence contradicting this thought..."
+            rows="3"
+            required
+          ></textarea>
+          <div class="invalid-feedback">
+            Please describe the contradictory evidence.
+          </div>
+        </div>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="previousStep(2)"
+        >
+          Back
+        </button>
+        <button type="button" class="btn btn-primary" onclick="nextStep(4)">
+          Next
+        </button>
+      </div>
+
+      <div id="step4" class="cognitive-step">
+        <h4 class="mb-4">Step 4: Reframe the Thought</h4>
+        <p>
+          Based on the evidence, how can you reframe this thought in a more
+          balanced or positive way?
+        </p>
+        <div class="form-group">
+          <textarea
+            class="form-control"
+            id="reframe"
+            name="reframe"
+            placeholder="Reframe your thought here..."
+            rows="3"
+            required
+          ></textarea>
+          <div class="invalid-feedback">
+            Please provide a reframe for your thought.
+          </div>
+        </div>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="previousStep(3)"
+        >
+          Back
+        </button>
+        <button
+          type="button"
+          class="btn btn-success"
+          onclick="completeCognitiveRestructuring()"
+        >
+          Complete
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Control the steps in the cognitive restructuring form
+  function nextStep(step) {
+    document.querySelector(".cognitive-step.active").classList.remove("active");
+    document.getElementById("step" + step).classList.add("active");
+  }
+
+  function previousStep(step) {
+    document.querySelector(".cognitive-step.active").classList.remove("active");
+    document.getElementById("step" + step).classList.add("active");
+  }
+
+  function completeCognitiveRestructuring() {
+    alert(
+      "Great job! You've completed the cognitive restructuring process. Remember, it's okay to take things one step at a time."
+    );
+    document.getElementById("cognitive-restructuring-form").reset();
+    nextStep(1); // Reset to step 1
+  }
+
+  // Form validation
+  (function () {
+    "use strict";
+    window.addEventListener(
+      "load",
+      function () {
+        var form = document.getElementById("cognitive-restructuring-form");
+        form.addEventListener(
+          "submit",
+          function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add("was-validated");
+          },
+          false
+        );
+      },
+      false
+    );
+  })();
+</script>
+
+<style>
+  .cognitive-step {
+    display: none;
+  }
+  .cognitive-step.active {
+    display: block;
+  }
+  .card {
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa;
+  }
+  .card-title {
+    font-size: 1.75rem;
+    color: #333;
+  }
+  .lead {
+    font-size: 1.25rem;
+    color: #666;
+  }
+  .btn {
+    width: 100px;
+  }
+</style>
+{% endblock %}

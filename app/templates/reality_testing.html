@@ -1,0 +1,191 @@
+{% extends "base.html" %} {% block title %}Reality Testing{% endblock %} {%
+block content %}
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title text-center">Reality Testing</h1>
+    <p class="lead text-center">
+      Let's work through this together, one step at a time.
+    </p>
+    <hr />
+    <form id="reality-testing-form">
+      <div id="step1" class="reality-step active">
+        <h4 class="mb-4">Step 1: Consider the Source</h4>
+        <p>
+          Can you think of a logical explanation for what you're experiencing?
+        </p>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="source"
+            name="source"
+            placeholder="Describe the source"
+            required
+          />
+          <div class="invalid-feedback">Please describe the source.</div>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="nextStep(2)">
+          Next
+        </button>
+      </div>
+
+      <div id="step2" class="reality-step">
+        <h4 class="mb-4">Step 2: Identify the Origin</h4>
+        <p>
+          Can you identify where this sound, image, or feeling is coming from?
+        </p>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="origin"
+            name="origin"
+            placeholder="Describe the origin"
+            required
+          />
+          <div class="invalid-feedback">Please describe the origin.</div>
+        </div>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="previousStep(1)"
+        >
+          Back
+        </button>
+        <button type="button" class="btn btn-primary" onclick="nextStep(3)">
+          Next
+        </button>
+      </div>
+
+      <div id="step3" class="reality-step">
+        <h4 class="mb-4">Step 3: Ask for Confirmation</h4>
+        <p>
+          Is there someone around you who can confirm what you're experiencing?
+        </p>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="others"
+            name="others"
+            placeholder="Describe what others say"
+            required
+          />
+          <div class="invalid-feedback">Please describe what others say.</div>
+        </div>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="previousStep(2)"
+        >
+          Back
+        </button>
+        <button type="button" class="btn btn-primary" onclick="nextStep(4)">
+          Next
+        </button>
+      </div>
+
+      <div id="step4" class="reality-step">
+        <h4 class="mb-4">Step 4: Evaluate Your Feelings</h4>
+        <p>
+          How does this experience make you feel? Is it familiar, or does it
+          feel out of place?
+        </p>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="feelings"
+            name="feelings"
+            placeholder="Describe your feelings"
+            required
+          />
+          <div class="invalid-feedback">Please describe your feelings.</div>
+        </div>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="previousStep(3)"
+        >
+          Back
+        </button>
+        <button type="button" class="btn btn-success" onclick="completeTest()">
+          Complete
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Control the steps in the reality testing form
+  function nextStep(step) {
+    document.querySelector(".reality-step.active").classList.remove("active");
+    document.getElementById("step" + step).classList.add("active");
+  }
+
+  function previousStep(step) {
+    document.querySelector(".reality-step.active").classList.remove("active");
+    document.getElementById("step" + step).classList.add("active");
+  }
+
+  function completeTest() {
+    // Show a completion message
+    alert(
+      "You’ve completed the reality testing. Remember, it's okay to reach out if you need further support."
+    );
+    document.getElementById("reality-testing-form").reset();
+    nextStep(1); // Reset to step 1
+  }
+
+  // Form validation
+  (function () {
+    "use strict";
+    window.addEventListener(
+      "load",
+      function () {
+        var form = document.getElementById("reality-testing-form");
+        form.addEventListener(
+          "submit",
+          function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add("was-validated");
+          },
+          false
+        );
+      },
+      false
+    );
+  })();
+</script>
+
+<style>
+  .reality-step {
+    display: none;
+  }
+  .reality-step.active {
+    display: block;
+  }
+  .card {
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa;
+  }
+  .card-title {
+    font-size: 1.75rem;
+    color: #333;
+  }
+  .lead {
+    font-size: 1.25rem;
+    color: #666;
+  }
+  .btn {
+    width: 100px;
+  }
+</style>
+{% endblock %}

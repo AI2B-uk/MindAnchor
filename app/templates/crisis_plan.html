@@ -1,0 +1,174 @@
+{% extends "base.html" %} {% block title %}Crisis Planning{% endblock %} {%
+block content %}
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title text-center">Crisis Planning</h1>
+    <p class="lead text-center">
+      Let's create a plan to help you feel prepared and in control during a
+      crisis.
+    </p>
+    <hr />
+    <form id="crisis-plan-form">
+      <div id="step1" class="crisis-step active">
+        <h4 class="mb-4">Step 1: Initial Steps</h4>
+        <p>
+          What should you do first if you start to feel like you're in crisis?
+          This might include steps like finding a safe place, contacting someone
+          you trust, or using a grounding technique.
+        </p>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="step1"
+            name="step1"
+            placeholder="Describe your first step..."
+            required
+          />
+          <div class="invalid-feedback">Please describe your first step.</div>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="nextStep(2)">
+          Next
+        </button>
+      </div>
+
+      <div id="step2" class="crisis-step">
+        <h4 class="mb-4">Step 2: Contact Information</h4>
+        <p>
+          Who should you contact if you need help? This could be a friend,
+          family member, or healthcare professional.
+        </p>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="contact"
+            name="contact"
+            placeholder="Name and phone number..."
+            required
+          />
+          <div class="invalid-feedback">
+            Please provide contact information.
+          </div>
+        </div>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="previousStep(1)"
+        >
+          Back
+        </button>
+        <button type="button" class="btn btn-primary" onclick="nextStep(3)">
+          Next
+        </button>
+      </div>
+
+      <div id="step3" class="crisis-step">
+        <h4 class="mb-4">Step 3: Professional Help</h4>
+        <p>
+          When should you reach out for professional help? Identify signs that
+          indicate it’s time to seek professional assistance.
+        </p>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="escalation"
+            name="escalation"
+            placeholder="Describe the signs or situations..."
+            required
+          />
+          <div class="invalid-feedback">
+            Please describe the escalation criteria.
+          </div>
+        </div>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="previousStep(2)"
+        >
+          Back
+        </button>
+        <button
+          type="button"
+          class="btn btn-success"
+          onclick="completeCrisisPlan()"
+        >
+          Complete
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Control the steps in the crisis plan form
+  function nextStep(step) {
+    document.querySelector(".crisis-step.active").classList.remove("active");
+    document.getElementById("step" + step).classList.add("active");
+  }
+
+  function previousStep(step) {
+    document.querySelector(".crisis-step.active").classList.remove("active");
+    document.getElementById("step" + step).classList.add("active");
+  }
+
+  function completeCrisisPlan() {
+    alert(
+      "Your crisis plan is complete. Keep it somewhere safe and easily accessible."
+    );
+    document.getElementById("crisis-plan-form").reset();
+    nextStep(1); // Reset to step 1
+  }
+
+  // Form validation
+  (function () {
+    "use strict";
+    window.addEventListener(
+      "load",
+      function () {
+        var form = document.getElementById("crisis-plan-form");
+        form.addEventListener(
+          "submit",
+          function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add("was-validated");
+          },
+          false
+        );
+      },
+      false
+    );
+  })();
+</script>
+
+<style>
+  .crisis-step {
+    display: none;
+  }
+  .crisis-step.active {
+    display: block;
+  }
+  .card {
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa;
+  }
+  .card-title {
+    font-size: 1.75rem;
+    color: #333;
+  }
+  .lead {
+    font-size: 1.25rem;
+    color: #666;
+  }
+  .btn {
+    width: 100px;
+  }
+</style>
+{% endblock %}

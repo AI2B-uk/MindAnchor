@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block title %}Settings{% endblock %} {% block
+content %}
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title text-center">Settings</h1>
+    <p class="lead text-center">Customise your experience with MindAnchor.</p>
+    <hr />
+    <form id="settings-form" method="POST" action="{{ url_for('settings') }}">
+      {{ form.hidden_tag() }}
+      <div class="form-group">
+        {{ form.notifications.label }}<br />
+        {{ form.notifications(class="form-control") }}
+      </div>
+      <div class="form-group">
+        {{ form.theme.label }}<br />
+        {{ form.theme(class="form-control") }}
+      </div>
+      <button type="submit" class="btn btn-primary">Save Settings</button>
+    </form>
+  </div>
+</div>
+
+<style>
+  .card {
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa;
+  }
+  .card-title {
+    font-size: 1.75rem;
+    color: #333;
+  }
+  .lead {
+    font-size: 1.25rem;
+    color: #666;
+  }
+  .btn {
+    width: 100px;
+  }
+</style>
+{% endblock %}

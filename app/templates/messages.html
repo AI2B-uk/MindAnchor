@@ -1,0 +1,56 @@
+{% extends "base.html" %} {% block title %}Pre-Recorded Messages{% endblock %}
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title text-center">Pre-Recorded Messages</h1>
+    <p class="lead text-center">Listen to messages from those you trust.</p>
+    <hr />
+    <div class="list-group">
+      {% for message in messages %}
+      <a
+        href="#"
+        class="list-group-item list-group-item-action"
+        onclick="playMessage('{{ url_for('static', filename='messages/' + message.filename) }}')"
+      >
+        {{ message.title }} - From {{ message.sender_name }}
+      </a>
+      {% endfor %}
+    </div>
+    <div id="message-player" class="mt-4 text-center" style="display: none">
+      <h4>Now Playing:</h4>
+      <audio id="audio-player" controls>
+        <source id="audio-source" src="" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+</div>
+
+<script>
+  function playMessage(messageUrl) {
+    const audioPlayer = document.getElementById("audio-player");
+    document.getElementById("audio-source").src = messageUrl;
+    audioPlayer.load();
+    document.getElementById("message-player").style.display = "block";
+    audioPlayer.play();
+  }
+</script>
+
+<style>
+  .card {
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa;
+  }
+  .card-title {
+    font-size: 1.75rem;
+    color: #333;
+  }
+  .lead {
+    font-size: 1.25rem;
+    color: #666;
+  }
+</style>
+{% endblock %}

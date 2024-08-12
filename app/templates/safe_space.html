@@ -1,0 +1,101 @@
+{% extends "base.html" %} {% block title %}Safe Space Visualisation{% endblock
+%} {% block content %}
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title text-center">Create Your Safe Space</h1>
+    <p class="lead text-center">
+      Choose an environment and sounds that make you feel calm and secure.
+    </p>
+    <hr />
+    <form id="safe-space-form">
+      <div class="form-group">
+        <label for="environment">Select an Environment:</label>
+        <select
+          class="form-control"
+          id="environment"
+          name="environment"
+          required
+        >
+          <option value="forest">Forest</option>
+          <option value="beach">Beach</option>
+          <option value="mountains">Mountains</option>
+          <option value="room">Calm Room</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="sounds">Add Calming Sounds:</label>
+        <select class="form-control" id="sounds" name="sounds" required>
+          <option value="waves">Waves</option>
+          <option value="birds">Birds Chirping</option>
+          <option value="wind">Gentle Wind</option>
+          <option value="silence">Silence</option>
+        </select>
+      </div>
+      <button type="button" class="btn btn-success" onclick="createSafeSpace()">
+        Create Safe Space
+      </button>
+    </form>
+
+    <div id="safe-space-visualisation" class="mt-4" style="display: none">
+      <h4 class="text-center">Your Safe Space</h4>
+      <div id="visualization-container" class="text-center">
+        <img
+          id="environment-image"
+          src=""
+          alt="Environment"
+          class="img-fluid"
+        />
+        <audio id="calming-sounds" controls style="display: none">
+          <source id="sound-source" src="" type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function createSafeSpace() {
+    const environment = document.getElementById("environment").value;
+    const sounds = document.getElementById("sounds").value;
+
+    const images = {
+      forest: "{{ url_for('static', filename='images/forest.jpg') }}",
+      beach: "{{ url_for('static', filename='images/beach.jpg') }}",
+      mountains: "{{ url_for('static', filename='images/mountains.jpg') }}",
+      room: "{{ url_for('static', filename='images/room.jpg') }}",
+    };
+
+    const soundFiles = {
+      waves: "{{ url_for('static', filename='sounds/waves.mp3') }}",
+      birds: "{{ url_for('static', filename='sounds/birds.mp3') }}",
+      wind: "{{ url_for('static', filename='sounds/wind.mp3') }}",
+      silence: "",
+    };
+
+    document.getElementById("environment-image").src = images[environment];
+    document.getElementById("sound-source").src = soundFiles[sounds];
+    const audioElement = document.getElementById("calming-sounds");
+    if (sounds !== "silence") {
+      audioElement.style.display = "block";
+      audioElement.load();
+    } else {
+      audioElement.style.display = "none";
+    }
+
+    document.getElementById("safe-space-visualisation").style.display = "block";
+  }
+</script>
+
+<style>
+  #visualization-container {
+    position: relative;
+    text-align: center;
+  }
+  #environment-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+</style>
+{% endblock %}
