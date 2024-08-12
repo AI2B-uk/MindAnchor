@@ -121,7 +121,7 @@ We welcome contributions from the community! To get started:
 
 5. **Open a Pull Request**
 
-Please make sure to follow the [contribution guidelines](CONTRIBUTING.md) and respect the [code of conduct](CODE_OF_CONDUCT.md).
+Please make sure to follow the [contribution guidelines](CONTRIBUTING.md).
 
 ## 📜 License
 
@@ -136,6 +136,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-If you have any questions or feedback, feel free to [open an issue](https://github.com/username/MindAnchor/issues) or reach out to the project maintainers at contact@mindanchor.com.
+If you have any questions or feedback, feel free to [open an issue](https://github.com/AI2B-uk/MindAnchor/issues) or reach out to the project maintainers at liam.brennan@ai2b.co.uk.
 
 Let's build a healthier mental space together with **MindAnchor**.
