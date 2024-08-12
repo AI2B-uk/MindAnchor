@@ -1,10 +1,14 @@
 # MindAnchor
 
+![MindAnchor Logo](https://github.com/AI2B-uk/MindAnchor/blob/main/MindAnchor.svg)
+
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python Version](https://img.shields.io/badge/python-3.7%2B-blue.svg)](https://www.python.org/downloads/)
-[![Contributors] [![Dangerousfish](https://avatars.githubusercontent.com/u/30146283?v=4&s=100)](https://github.com/dangerousfish)
 
-![MindAnchor Logo](https://github.com/AI2B-uk/MindAnchor/blob/main/MindAnchor.svg)
+## 🫂Contributors
+
+(https://avatars.githubusercontent.com/u/30146283?v=4&s=100)](https://github.com/dangerousfish)
+**Dangerousfish**
 
 MindAnchor is a mental health companion app designed to help users manage their mental well-being through various techniques such as grounding exercises, cognitive restructuring, journaling, and crisis planning. Whether you're dealing with anxiety, stress, or just need a mental health check-in, MindAnchor provides tools and resources to help you stay grounded and focused.
 
